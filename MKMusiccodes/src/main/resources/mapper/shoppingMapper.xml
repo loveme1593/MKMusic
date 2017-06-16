@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 쇼핑 관련 처리 SQL -->
+<mapper namespace="global.sesoc.music.dao.ShoppingMapper">
+
+	<select id="itemList" resultType="Music">
+		select* from musiccd
+	</select>
+
+	<select id="getItem" parameterType="_int" resultType="Music">
+		select*
+		from musiccd where cdnum=#{cdnum}
+	</select>
+
+	<insert id="purchase" parameterType="Sales">
+		insert into musicsales
+		values(
+		#{buy_id},#{cdnum},#{quantity},#{amount},sysdate
+		)
+	</insert>
+
+	<update id="changeQuantity" parameterType="map">
+		update musiccd set
+		quantity=#{quantity} where cdnum=#{cdnum}
+	</update>
+
+	<select id="purchaseList" parameterType="String" resultType="Sales">
+		select c.cdnum, c.artist, c.title, c.price, s.buy_id, s.quantity,
+		s.amount,s.salesdate
+		from musiccd c, musicsales s
+		where c.cdnum=s.cdnum
+		and s.buy_id=#{buy_id}
+		order by s.salesdate desc
+	</select>
+
+	<select id="sellItemList" parameterType="String" resultType="Music">
+		select * from musiccd where sell_id=#{sell_id}
+	</select>
+
+	<select id="numsofpurchase" resultType="Sales">
+		select decode(c.cdnum,
+		c.cdnum, (select artist from musiccd
+		where cdnum=c.cdnum)) as artist
+		,
+		decode(c.cdnum, c.cdnum, (select title from musiccd where
+		cdnum=c.cdnum)) as title,
+		sum(s.quantity) as cnt
+		from musiccd c,
+		musicsales s
+		where c.cdnum=s.cdnum
+		group by c.cdnum
+		order by
+		sum(s.quantity) desc
+	</select>
+
+	<insert id="insertItem" parameterType="Music">
+		insert into musiccd
+		values(cdnum_seq.nextval,#{artist},#{title},#{price},#{sell_id},0)
+	</insert>
+</mapper>

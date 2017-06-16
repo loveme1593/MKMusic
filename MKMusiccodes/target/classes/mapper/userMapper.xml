@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원정보 처리 SQL -->
+<mapper namespace="global.sesoc.music.dao.UserMapper">
+
+	<!-- ID로 회원 정보 검색 -->
+	<select id="selectUser" parameterType="string" resultType="User">
+		select * from musicuser where user_id = #{user_id}
+	</select>
+
+	<!-- 회원가입 -->
+	<select id="insertUser" parameterType="User" resultType="_int">
+		insert
+		into musicuser 
+		values(#{user_id},#{user_password},#{user_name},#{user_type},#{user_password_q},#{user_password_a})
+	</select>
+
+</mapper>
