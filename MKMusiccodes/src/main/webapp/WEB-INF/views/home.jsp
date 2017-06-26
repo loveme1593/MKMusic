@@ -65,7 +65,7 @@
 		</div>
 	</nav>
 	<!-- /.navbar-collapse -->
-
+   <!-- merge exercise -->
 	<!-- Header -->
 	<a name="about"></a>
 	<div class="intro-header">
