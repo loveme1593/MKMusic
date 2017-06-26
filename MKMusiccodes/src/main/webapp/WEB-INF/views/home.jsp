@@ -65,7 +65,6 @@
 		</div>
 	</nav>
 	<!-- /.navbar-collapse -->
-   <!-- merge exercise -->
 	<!-- Header -->
 	<a name="about"></a>
 	<div class="intro-header">
@@ -75,6 +74,9 @@
 				<div class="col-lg-12">
 					<div class="intro-message">
 						<h1>MK Music</h1>
+						<!-- merge exercise -->
+						<h3>Enjoy your music</h3>
+						<!-- merge exercise -->
 						<h3>Everything about music</h3>
 						<hr class="intro-divider">
 						<ul class="list-inline intro-social-buttons">
